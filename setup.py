@@ -12,13 +12,13 @@ setup(
     'aleph',
     'aleph.aleph_cli',
     'aleph.aleph_cli.init',
+    'aleph.aleph_cli.activate',
     'aleph.aleph_cli.dataset',
-
     'aleph.aleph_cli.utils'
   ],
   zip_safe=False,
   install_requires=[
-    
+    'virtualenv'
   ],
   entry_points={
     'console_scripts': ['aleph=aleph.cli:main']

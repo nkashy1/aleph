@@ -1,6 +1,10 @@
 import os
+import subprocess
 
 from aleph.aleph_cli.utils.generator_exception import GeneratorException
+from aleph.aleph_cli.utils.aleph_filesystem import execfile
+
+# TODO: move all this path stuff to the aleph_filesystem
 
 PATHS = {
   'ALEPH': '.aleph',
@@ -11,6 +15,12 @@ PATHS = {
   'OPTIMIZERS': 'optimizers'
 }
 
+REQUIREMENTS = [
+  'numpy',
+  'tensorflow',
+  #aleph
+]
+
 def run(args):
 
   # root project directory and error checking
@@ -19,23 +29,33 @@ def run(args):
     root_path = os.path.join(os.getcwd(), args.name)
     name = args.name
     
-    if os.path.exists(root_path):
-      raise GeneratorException(f'File or directory already exists at {root_path}. Please specify another name.')
+    if os.path.isdir(root_path):
+      raise GeneratorException(f'Error: File or directory already exists at {root_path}. Please specify another name.')
     
     os.mkdir(root_path)
 
   else: 
     root_path = os.getcwd()
-    name = os.basename(root_path)
+    name = os.path.basename(root_path)
 
-    if os.path.exist(os.path.join(root_path, PATHS['ALEPH'])):
-      raise GeneratorException(f'This directory already contains an aleph project. Please initialize your project in another directory.')
+    if os.path.isdir(os.path.join(root_path, PATHS['ALEPH'])):
+      raise GeneratorException(f'Error: This directory already contains an aleph project. Please initialize your project in another directory.')
 
   # top level sub-directories
 
-  for k,v in PATHS.items():
+  for _,v in PATHS.items():
     path = os.path.join(root_path, v)
     os.mkdir(path)
+
+  # virtual env
+
+  env_path = os.path.join(root_path, f'.{name}-environment')
+  activate_this_path = os.path.join(os.path.join(env_path, 'bin'), 'activate_this.py')
+  packages = ' '.join(REQUIREMENTS)
+
+  subprocess.call(f'virtualenv --python python3 {env_path}', shell=True)
+  execfile(activate_this_path)
+  subprocess.call(f'pip install {packages}', shell=True)
 
   # status
 
