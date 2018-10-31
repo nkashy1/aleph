@@ -1,0 +1,3 @@
+
+class GeneratorException(Exception):
+  pass
