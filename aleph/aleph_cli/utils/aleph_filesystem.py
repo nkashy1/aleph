@@ -29,14 +29,16 @@ def activate_project_environment():
 
 def execfile(filepath, globals=None, locals=None):
   """
-  python3 replacement for exefile
+  python3 replacement for execfile
   """
 
   if globals is None:
     globals = {}
+
   globals.update({
     "__file__": filepath,
     "__name__": "__main__",
   })
+
   with open(filepath, 'rb') as file:
     exec(compile(file.read(), filepath, 'exec'), globals, locals)

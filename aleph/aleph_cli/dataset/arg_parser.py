@@ -19,7 +19,13 @@ def add_subparsers(subparsers):
     )
 
   add_subparser.add_argument(
-    'url',
+    'src',
+    default=None
+    )
+  
+  add_subparser.add_argument(
+    'dst',
+    nargs='?',
     default=None
     )
 
@@ -29,6 +35,5 @@ def add_subparsers(subparsers):
 
   remove_subparser.add_argument(
     'name',
-    nargs='?',
     default=None
     )

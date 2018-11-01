@@ -2,6 +2,8 @@
 
 import argparse
 
+from termcolor import cprint
+
 import aleph.aleph_cli.init.arg_parser
 import aleph.aleph_cli.dataset.arg_parser
 import aleph.aleph_cli.activate.arg_parser
@@ -29,9 +31,6 @@ def main():
   parser = generate_arg_parser()
   args = parser.parse_args()
 
-  # print(args)
-  # globals()[kwargs.pop('command')](**kwargs)
-
   try:
     if args.command == 'init':
       aleph.aleph_cli.init.generator.run(args)
@@ -42,4 +41,4 @@ def main():
     if args.command == 'deactivate':
       aleph.aleph_cli.activate.generator.run(args)
   except GeneratorException as error:
-    print(error)
+    cprint(error, 'red')
