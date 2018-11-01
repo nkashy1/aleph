@@ -11,7 +11,7 @@ setup(
     'aleph',
     'aleph.aleph_cli',
     'aleph.aleph_cli.init',
-    'aleph.aleph_cli.dataset',
+    'aleph.aleph_cli.datasets',
     'aleph.aleph_cli.features',
     'aleph.aleph_cli.labels',
     'aleph.aleph_cli.models',

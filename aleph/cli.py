@@ -5,14 +5,14 @@ import argparse
 from termcolor import cprint
 
 import aleph.aleph_cli.init.arg_parser
-import aleph.aleph_cli.dataset.arg_parser
+import aleph.aleph_cli.datasets.arg_parser
 import aleph.aleph_cli.features.arg_parser
 import aleph.aleph_cli.labels.arg_parser
 import aleph.aleph_cli.models.arg_parser
 import aleph.aleph_cli.optimizers.arg_parser
 
 import aleph.aleph_cli.init.generator
-import aleph.aleph_cli.dataset.generator
+import aleph.aleph_cli.datasets.generator
 import aleph.aleph_cli.features.generator
 import aleph.aleph_cli.labels.generator
 import aleph.aleph_cli.models.generator
@@ -27,7 +27,7 @@ def generate_arg_parser():
   subparsers.required = True
 
   aleph.aleph_cli.init.arg_parser.add_subparsers(subparsers)
-  aleph.aleph_cli.dataset.arg_parser.add_subparsers(subparsers)
+  aleph.aleph_cli.datasets.arg_parser.add_subparsers(subparsers)
   aleph.aleph_cli.features.arg_parser.add_subparsers(subparsers)
   aleph.aleph_cli.labels.arg_parser.add_subparsers(subparsers)
   aleph.aleph_cli.models.arg_parser.add_subparsers(subparsers)
@@ -43,7 +43,7 @@ def main():
     if args.command == 'init':
       aleph.aleph_cli.init.generator.run(args)
     if args.command == 'datasets':
-      aleph.aleph_cli.dataset.generator.run(args)
+      aleph.aleph_cli.datasets.generator.run(args)
     if args.command == 'features':
       aleph.aleph_cli.features.generator.run(args)
     if args.command == 'labels':
