@@ -1,17 +1,17 @@
 import argparse
 
 def add_subparsers(subparsers):
-  features_group = subparsers.add_parser('features')
-  features_subparser = features_group.add_subparsers(dest='subcommand')
-  features_subparser.required = True
+  labels_group = subparsers.add_parser('labels')
+  labels_subparser = labels_group.add_subparsers(dest='subcommand')
+  labels_subparser.required = True
 
   # list
 
-  list_subparser = features_subparser.add_parser('list')
+  list_subparser = labels_subparser.add_parser('list')
 
   # add
 
-  add_subparser = features_subparser.add_parser('add')
+  add_subparser = labels_subparser.add_parser('add')
 
   add_subparser.add_argument(
     'name',
@@ -30,7 +30,7 @@ def add_subparsers(subparsers):
 
   # remove
 
-  remove_subparser = features_subparser.add_parser('remove')
+  remove_subparser = labels_subparser.add_parser('remove')
 
   remove_subparser.add_argument(
     'name',

@@ -7,7 +7,6 @@ setup(
   url='https://github.com/doc-ai/aleph',
   author='doc.ai',
   license='Apache 2',
-  # packages=setuptools.find_packages(), #['aleph'],
   packages=[
     'aleph',
     'aleph.aleph_cli',
@@ -15,6 +14,9 @@ setup(
     'aleph.aleph_cli.activate',
     'aleph.aleph_cli.dataset',
     'aleph.aleph_cli.features',
+    'aleph.aleph_cli.labels',
+    'aleph.aleph_cli.models',
+    'aleph.aleph_cli.optimizers',
     'aleph.aleph_cli.utils',
   ],
   zip_safe=False,

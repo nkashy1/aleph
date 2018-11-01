@@ -1,7 +1,7 @@
 import argparse
 
 def add_subparsers(subparsers):
-  dataset_group = subparsers.add_parser('dataset')
+  dataset_group = subparsers.add_parser('datasets')
   dataset_subparser = dataset_group.add_subparsers(dest='subcommand')
   dataset_subparser.required = True
 
