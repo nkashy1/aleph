@@ -1,8 +1,11 @@
 import os
+import inspect
 
 from aleph.aleph_cli.utils.aleph_filesystem import exit_if_not_aleph_project
 from aleph.aleph_cli.utils.aleph_filesystem import activate_project_environment
 from aleph.aleph_cli.utils.generator_exception import GeneratorException
+
+from jinja2 import Template
 
 def run(args):
   exit_if_not_aleph_project()
@@ -23,12 +26,19 @@ def run_list(args):
 
 def run_add(args):
   name = args.name
+  otype = args.type if args.type is not None else name
 
   if name in optimizers_filenames():
     raise GeneratorException(f'Error: The optimizer {name} already exists. Please give this optimizer another name.')
 
   filepath = os.path.join(optimizers_path(), f'{name}.py')
-  open(filepath, 'a').close()
+  
+  with open(optimizer_template_path(otype)) as f:
+    template = Template(f.read())
+
+  with open(filepath, 'w') as f:
+    f.write(template.render(vars(args)))
+
 
 def run_remove(args):
   name = args.name
@@ -42,6 +52,17 @@ def run_remove(args):
 # ====== Utilties ======
 
 # TODO: move all path stuff to aleph_filesystem?
+
+# package paths
+
+def templates_path():
+  import aleph.aleph_cli.optimizers.templates
+  return os.path.dirname(inspect.getfile(aleph.aleph_cli.optimizers.templates))
+
+def optimizer_template_path(name):
+  return os.path.join(templates_path(), f'{name}.py.jinja2')
+
+# project paths
 
 def optimizers_path():
   root_path = os.getcwd()

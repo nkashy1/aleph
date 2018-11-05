@@ -1,0 +1,8 @@
+import tensorflow as tf
+
+default_params = {
+  'learning_rate':1e-4
+}
+
+def optimizer(params):
+  return tf.train.AdamOptimizer(learning_rate=params['learning_rate'])
