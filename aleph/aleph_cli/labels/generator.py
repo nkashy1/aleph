@@ -1,8 +1,11 @@
 import os
+import inspect
 
 from aleph.aleph_cli.utils.aleph_filesystem import exit_if_not_aleph_project
 from aleph.aleph_cli.utils.aleph_filesystem import activate_project_environment
 from aleph.aleph_cli.utils.generator_exception import GeneratorException
+
+from jinja2 import Template
 
 def run(args):
   exit_if_not_aleph_project()
@@ -28,7 +31,12 @@ def run_add(args):
     raise GeneratorException(f'Error: The label {name} already exists. Please give this label another name.')
 
   filepath = os.path.join(labels_path(), f'{name}.py')
-  open(filepath, 'a').close()
+  
+  with open(label_template_path()) as f:
+    template = Template(f.read())
+
+  with open(filepath, 'w') as f:
+    f.write(template.render(vars(args)))
 
 def run_remove(args):
   name = args.name
@@ -42,6 +50,17 @@ def run_remove(args):
 # ====== Utilties ======
 
 # TODO: move all path stuff to aleph_filesystem?
+
+# package paths
+
+def templates_path():
+  import aleph.aleph_cli.labels.templates
+  return os.path.dirname(inspect.getfile(aleph.aleph_cli.labels.templates))
+
+def label_template_path():
+  return os.path.join(templates_path(), 'label.py.jinja2')
+
+# project paths
 
 def labels_path():
   root_path = os.getcwd()
