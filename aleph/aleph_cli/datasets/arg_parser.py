@@ -14,20 +14,27 @@ def add_subparsers(subparsers):
   add_subparser = dataset_subparser.add_parser('add')
 
   add_subparser.add_argument(
-    'name',
-    default=None
+    'name'
     )
 
   add_subparser.add_argument(
-    'src',
-    default=None
+    'src'
     )
   
   add_subparser.add_argument(
     'dst',
-    nargs='?',
-    default=None
+    nargs='?'
     )
+  
+  add_subparser.add_argument(
+    'type',
+    choices=['tfrecord']
+  )
+
+  add_subparser.add_argument(
+    'action',
+    choices=['train', 'validate', 'test']
+  )
 
   # remove
 

@@ -6,7 +6,7 @@ from aleph.aleph_cli.utils.generator_exception import GeneratorException
 def exit_if_not_aleph_project():
   """
   Checks to see if we are executing the aleph command within an aleph project
-  and raises and exception, which exits, if we are not
+  and raises an exception if we are not
   """
 
   root_path = os.getcwd()
@@ -15,7 +15,7 @@ def exit_if_not_aleph_project():
 
 def activate_project_environment():
   """
-  If the aleph command is not being run in the  project's virtual environment, then
+  If the aleph command is not being run in the project's virtual environment, then
   activate the project's virtual environment
   """
 
@@ -29,7 +29,8 @@ def activate_project_environment():
 
 def execfile(filepath, globals=None, locals=None):
   """
-  python3 replacement for execfile
+  A python3 replacement for execfile, allowing us to set the active virtual environment rather than
+  a subprocess's virtual environment
   """
 
   if globals is None:

@@ -12,16 +12,21 @@ setup(
     'aleph.aleph_cli',
     'aleph.aleph_cli.init',
     'aleph.aleph_cli.datasets',
+    'aleph.aleph_cli.datasets.templates',
     'aleph.aleph_cli.features',
     'aleph.aleph_cli.labels',
     'aleph.aleph_cli.models',
     'aleph.aleph_cli.optimizers',
     'aleph.aleph_cli.utils',
   ],
+  package_data={
+    '': ['*.jinja2']
+  },
   zip_safe=False,
   install_requires=[
     'virtualenv',
     'termcolor',
+    'Jinja2'
   ],
   entry_points={
     'console_scripts': ['aleph=aleph.cli:main']
