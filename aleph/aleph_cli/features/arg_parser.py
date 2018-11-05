@@ -14,18 +14,16 @@ def add_subparsers(subparsers):
   add_subparser = features_subparser.add_parser('add')
 
   add_subparser.add_argument(
-    'name',
-    default=None
+    'name'
     )
 
   add_subparser.add_argument(
     'type',
-    default=None
+    choices=['image', 'float32', 'int64']
     )
   
   add_subparser.add_argument(
-    'shape',
-    default=None
+    'shape'
     )
 
   # remove

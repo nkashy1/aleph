@@ -14,6 +14,7 @@ setup(
     'aleph.aleph_cli.datasets',
     'aleph.aleph_cli.datasets.templates',
     'aleph.aleph_cli.features',
+    'aleph.aleph_cli.features.templates',
     'aleph.aleph_cli.labels',
     'aleph.aleph_cli.models',
     'aleph.aleph_cli.optimizers',
