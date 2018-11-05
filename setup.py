@@ -18,6 +18,7 @@ setup(
     'aleph.aleph_cli.labels',
     'aleph.aleph_cli.labels.templates',
     'aleph.aleph_cli.models',
+    'aleph.aleph_cli.models.templates',
     'aleph.aleph_cli.optimizers',
     'aleph.aleph_cli.optimizers.templates',
     'aleph.aleph_cli.utils',

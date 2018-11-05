@@ -18,6 +18,8 @@ PATHS = {
 REQUIREMENTS = [
   'numpy',
   'tensorflow',
+  'tensorflow_hub',
+  'Jinja2'
   #aleph
 ]
 

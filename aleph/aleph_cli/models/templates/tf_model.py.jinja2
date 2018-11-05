@@ -1,0 +1,116 @@
+import tensorflow as tf
+import numpy as np
+
+from tensorflow.python.keras import backend as K
+
+def model_fn(features, labels, mode, params):
+  
+  if mode == tf.estimator.ModeKeys.TRAIN:
+    K.set_learning_phase(True)
+  else:
+    K.set_learning_phase(False)
+
+  # build model layers
+  
+  assert('add custom layers here')
+
+  # layers = tf.reshape(features['image'], [-1, 128, 128, 3])
+  # layers = tf.keras.layers.Conv2D(32, (3,3), activation=tf.nn.relu)(layers)
+  # layers = tf.keras.layers.MaxPooling2D((2,2))(layers)
+  # layers = tf.keras.layers.Flatten()(layers)
+  # layers = tf.keras.layers.Dense(64, activation=tf.nn.relu)(layers)
+  # layers = tf.keras.layers.Dropout(0.2)(layers)
+  # logits = tf.keras.layers.Dense(10, activation=None)(layers)
+
+  # prepare predictions
+
+  assert('add predictions here')
+
+  predictions = {
+
+  }
+  prediction_output = tf.estimator.export.PredictOutput({
+
+  })
+
+  # predictions = {
+  #   'probability': probabilities,
+  #   'class': tf.to_int32(probabilities > 0.5)
+  # }
+  # prediction_output = tf.estimator.export.PredictOutput({
+  #   'probability': probabilities,
+  #   'class': tf.to_int32(probabilities > 0.5)
+  # })
+
+  # return an estimator spec for prediction before computing a loss
+
+  if mode == tf.estimator.ModeKeys.PREDICT:
+    return tf.estimator.EstimatorSpec(
+      mode=mode, 
+      predictions=predictions,
+      export_outputs={
+        tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: prediction_output
+      })
+
+  # calculate loss
+
+  assert('calculate loss here')
+
+  loss = tf.constant(-1)
+
+  # labels = tf.reshape(labels, [-1,1])
+  # labels = tf.cast(labels, tf.float32)
+
+  # loss = tf.losses.sigmoid_cross_entropy(
+  #   multi_class_labels=labels,
+  #   logits=logits
+  # )
+
+  # calculate accuracy metric
+
+  assert('calculate accuracy metric here')
+
+  # accuracy = tf.metrics.accuracy(labels=labels, predictions=predictions["class"], name='accuracy')
+
+  if mode == tf.estimator.ModeKeys.TRAIN:
+
+    # generate some summary info
+
+    # tf.summary.scalar('average_loss', loss)
+    # tf.summary.scalar('accuracy', accuracy[1])
+
+    # prepare an optimizer
+
+    optimizer = params['optimizer']
+    
+    train_op = optimizer.minimize(
+      loss=loss,
+      global_step=tf.train.get_global_step())
+
+    # return an estimator spec
+
+    return tf.estimator.EstimatorSpec(
+      mode=mode, 
+      loss=loss, 
+      train_op=train_op)
+  
+  if mode == tf.estimator.ModeKeys.EVAL:
+
+    # add evaluation metrics
+    
+    assert('add evaluation metrics here')
+
+    eval_metric_ops = {
+
+    }
+
+    # eval_metric_ops = {
+    #   "accuracy": accuracy
+    # }
+
+    # return an estimator spec
+
+    return tf.estimator.EstimatorSpec(
+      mode=mode, 
+      loss=loss, 
+      eval_metric_ops=eval_metric_ops)

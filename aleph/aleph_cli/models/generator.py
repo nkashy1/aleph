@@ -1,8 +1,11 @@
 import os
+import inspect
 
 from aleph.aleph_cli.utils.aleph_filesystem import exit_if_not_aleph_project
 from aleph.aleph_cli.utils.aleph_filesystem import activate_project_environment
 from aleph.aleph_cli.utils.generator_exception import GeneratorException
+
+from jinja2 import Template
 
 def run(args):
   exit_if_not_aleph_project()
@@ -28,7 +31,12 @@ def run_add(args):
     raise GeneratorException(f'Error: The model {name} already exists. Please give this model another name.')
 
   filepath = os.path.join(models_path(), f'{name}.py')
-  open(filepath, 'a').close()
+  
+  with open(tf_model_template_path()) as f:
+    template = Template(f.read())
+
+  with open(filepath, 'w') as f:
+    f.write(template.render(vars(args)))
 
 def run_remove(args):
   name = args.name
@@ -42,6 +50,20 @@ def run_remove(args):
 # ====== Utilties ======
 
 # TODO: move all path stuff to aleph_filesystem?
+
+# package paths
+
+def templates_path():
+  import aleph.aleph_cli.models.templates
+  return os.path.dirname(inspect.getfile(aleph.aleph_cli.models.templates))
+
+def tf_model_template_path():
+  return os.path.join(templates_path(), 'tf_model.py.jinja2')
+
+def tfhub_model_template_path():
+  return os.path.join(templates_path(), 'tfhub_model.py.jinja2')
+
+# project paths
 
 def models_path():
   root_path = os.getcwd()
