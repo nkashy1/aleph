@@ -10,6 +10,7 @@ import aleph.aleph_cli.features.arg_parser
 import aleph.aleph_cli.labels.arg_parser
 import aleph.aleph_cli.models.arg_parser
 import aleph.aleph_cli.optimizers.arg_parser
+import aleph.aleph_cli.train.arg_parser
 
 import aleph.aleph_cli.init.generator
 import aleph.aleph_cli.datasets.generator
@@ -17,6 +18,7 @@ import aleph.aleph_cli.features.generator
 import aleph.aleph_cli.labels.generator
 import aleph.aleph_cli.models.generator
 import aleph.aleph_cli.optimizers.generator
+import aleph.aleph_cli.train.generator
 
 from aleph.aleph_cli.utils.generator_exception import GeneratorException
 
@@ -32,6 +34,7 @@ def generate_arg_parser():
   aleph.aleph_cli.labels.arg_parser.add_subparsers(subparsers)
   aleph.aleph_cli.models.arg_parser.add_subparsers(subparsers)
   aleph.aleph_cli.optimizers.arg_parser.add_subparsers(subparsers)
+  aleph.aleph_cli.train.arg_parser.add_subparsers(subparsers)
 
   return parser
 
@@ -52,5 +55,7 @@ def main():
       aleph.aleph_cli.models.generator.run(args)
     if args.command == 'optimizers':
       aleph.aleph_cli.optimizers.generator.run(args)
+    if args.command == 'train':
+      aleph.aleph_cli.train.generator.run(args)
   except GeneratorException as error:
     cprint(error, 'red')

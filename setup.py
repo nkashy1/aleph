@@ -11,6 +11,7 @@ setup(
     'aleph',
     'aleph.aleph_cli',
     'aleph.aleph_cli.init',
+    'aleph.aleph_cli.init.templates',
     'aleph.aleph_cli.datasets',
     'aleph.aleph_cli.datasets.templates',
     'aleph.aleph_cli.features',
@@ -21,6 +22,7 @@ setup(
     'aleph.aleph_cli.models.templates',
     'aleph.aleph_cli.optimizers',
     'aleph.aleph_cli.optimizers.templates',
+    'aleph.aleph_cli.train',
     'aleph.aleph_cli.utils',
   ],
   package_data={
@@ -29,8 +31,7 @@ setup(
   zip_safe=False,
   install_requires=[
     'virtualenv',
-    'termcolor',
-    'Jinja2'
+    'termcolor'
   ],
   entry_points={
     'console_scripts': ['aleph=aleph.cli:main']

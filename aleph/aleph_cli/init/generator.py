@@ -1,5 +1,6 @@
 import os
 import subprocess
+import inspect
 
 from aleph.aleph_cli.utils.generator_exception import GeneratorException
 from aleph.aleph_cli.utils.aleph_filesystem import execfile
@@ -43,12 +44,6 @@ def run(args):
     if os.path.isdir(os.path.join(root_path, PATHS['ALEPH'])):
       raise GeneratorException(f'Error: This directory already contains an aleph project. Please initialize your project in another directory.')
 
-  # top level sub-directories
-
-  for _,v in PATHS.items():
-    path = os.path.join(root_path, v)
-    os.mkdir(path)
-
   # virtual env
 
   env_path = os.path.join(root_path, f'.{name}-environment')
@@ -58,6 +53,18 @@ def run(args):
   subprocess.call(f'virtualenv --python python3 {env_path}', shell=True)
   execfile(activate_this_path)
   subprocess.call(f'pip install {packages}', shell=True)
+
+  # top level sub-directories
+
+  for _,v in PATHS.items():
+    path = os.path.join(root_path, v)
+    os.mkdir(path)
+
+  # top level files
+
+  from jinja2 import Template
+
+  
 
   # status
 
