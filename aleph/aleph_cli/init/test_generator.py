@@ -4,7 +4,7 @@ import tempfile
 import types
 import unittest
 
-from aleph.aleph_cli.init import generator
+from . import generator
 
 class InitGeneratorTests(unittest.TestCase):
     def setUp(self):
