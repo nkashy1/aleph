@@ -31,13 +31,13 @@ def run(args):
   if args.name is not None:
     root_path = os.path.join(os.getcwd(), args.name)
     name = args.name
-    
+
     if os.path.isdir(root_path):
       raise GeneratorException(f'Error: File or directory already exists at {root_path}. Please specify another name.')
-    
+
     os.mkdir(root_path)
 
-  else: 
+  else:
     root_path = os.getcwd()
     name = os.path.basename(root_path)
 
@@ -64,7 +64,7 @@ def run(args):
 
   from jinja2 import Template
 
-  
+
 
   # status
 
